@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LucroFeX — Your Audience. Our System. Your Earnings.</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── HERO ── */
+.hero{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:clamp(120px,14vw,170px) clamp(20px,5vw,64px) clamp(70px,9vw,110px);position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 95% 75% at 50% -5%,rgba(11,47,204,.28) 0%,transparent 62%),radial-gradient(ellipse 55% 45% at 85% 35%,rgba(56,190,255,.1) 0%,transparent 55%),radial-gradient(ellipse 45% 55% at 12% 75%,rgba(201,168,76,.07) 0%,transparent 55%),var(--ink)}
+.hero-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,black 10%,transparent 100%)}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:center;max-width:1200px;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(34,197,94,.28);background:rgba(34,197,94,.08);padding:8px 18px;border-radius:50px;font-size:12px;font-weight:600;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:clamp(20px,3vw,30px);animation:fadeUp .9s both}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:breathe 2s infinite;box-shadow:0 0 6px var(--green)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,5.5vw,72px);font-weight:900;line-height:1.06;letter-spacing:-1.5px;color:white;margin-bottom:clamp(18px,2.5vw,28px);animation:fadeUp .9s .08s both}
+.hero h1 em{font-style:italic;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+.hero-sub{font-size:clamp(15px,1.8vw,18px);font-weight:300;color:rgba(255,255,255,.44);line-height:1.85;max-width:490px;margin-bottom:clamp(28px,4vw,44px);animation:fadeUp .9s .16s both}
+.hero-sub strong{color:rgba(255,255,255,.85);font-weight:600}
+.hero-actions{display:flex;flex-direction:column;gap:13px;animation:fadeUp .9s .24s both}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;width:fit-content;background:rgba(37,211,102,.1);border:1.5px solid rgba(37,211,102,.3);color:var(--green);font-family:'Outfit',sans-serif;font-size:clamp(14px,1.6vw,16px);font-weight:600;padding:clamp(14px,1.8vw,17px) clamp(24px,3vw,36px);border-radius:50px;transition:all .3s}
+.btn-wa:hover{background:rgba(37,211,102,.18);border-color:rgba(37,211,102,.5);transform:translateY(-2px)}
+.hero-caption{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.28);margin-top:8px}
+.hero-caption::before{content:'✓';color:var(--green);font-weight:700}
+
+/* DASHBOARD CARD */
+.hero-right{display:flex;flex-direction:column;gap:14px;animation:fadeUp .9s .3s both}
+.dash-card{background:rgba(8,20,43,.88);border:1px solid rgba(56,190,255,.14);border-radius:26px;padding:clamp(22px,3vw,32px);backdrop-filter:blur(24px);box-shadow:0 32px 90px rgba(0,0,0,.5);position:relative;overflow:hidden}
+.dash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--sky),var(--gold),transparent)}
+.dc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.dc-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:white}
+.dc-live{display:flex;align-items:center;gap:6px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);padding:5px 12px;border-radius:50px;font-size:11px;font-weight:700;color:var(--green)}
+.dc-live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:breathe 2s infinite}
+.dc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.dc-stat{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:14px 12px;text-align:center}
+.dc-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:white;line-height:1}
+.dc-val.sky{color:var(--sky)}.dc-val.gold{color:var(--gold)}.dc-val.green{color:var(--green)}
+.dc-label{font-size:10px;color:var(--muted);margin-top:5px;letter-spacing:.3px}
+.dc-bar-row{margin-bottom:10px}
+.dc-bar-top{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px}
+.dc-track{height:5px;background:rgba(255,255,255,.06);border-radius:5px;overflow:hidden}
+.dc-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--royal),var(--sky));background-size:200%;animation:shimmer 3s linear infinite}
+.dc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.dc-tag{font-size:10px;font-weight:600;padding:5px 12px;border-radius:50px}
+.dc-tag.green{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);color:var(--green)}
+.dc-tag.blue{background:rgba(56,190,255,.1);border:1px solid rgba(56,190,255,.18);color:var(--sky)}
+.dc-tag.gold{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.22);color:var(--gold)}
+.notif-pop{background:rgba(8,20,43,.92);border:1px solid rgba(56,190,255,.14);border-radius:18px;padding:15px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 48px rgba(0,0,0,.45);animation:slideRight .7s .9s cubic-bezier(.16,1,.3,1) both}
+@keyframes slideRight{from{transform:translateX(60px);opacity:0}to{transform:translateX(0);opacity:1}}
+.np-icon{font-size:26px;flex-shrink:0}
+.np-title{font-size:13px;font-weight:700;color:white}
+.np-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.np-badge{margin-left:auto;flex-shrink:0;background:var(--green);color:#052e16;font-size:10px;font-weight:800;padding:4px 10px;border-radius:50px}
+
+/* STATS */
+.hero-stats{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:clamp(24px,4vw,60px);flex-wrap:wrap;padding-top:clamp(28px,4vw,48px);border-top:1px solid var(--border);animation:fadeUp .9s .45s both}
+.hs-item{text-align:center}
+.hs-val{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,50px);font-weight:800;color:white;letter-spacing:-1px;line-height:1}
+.hs-val span{color:var(--sky)}
+.hs-label{font-size:12px;color:var(--muted);margin-top:6px;letter-spacing:.5px}
+.hs-sep{width:1px;height:48px;background:var(--border);flex-shrink:0}
+
+/* PROMISE CARDS */
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);border-radius:32px;overflow:hidden;margin-top:clamp(44px,6vw,72px)}
+.p-card{background:var(--navy);padding:clamp(34px,5vw,58px) clamp(28px,4vw,46px);position:relative;overflow:hidden;transition:background .45s}
+.p-card:hover{background:#0B1D42}
+.p-line{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--sky),transparent);opacity:0;transform:scaleX(.5);transition:opacity .4s,transform .4s}
+.p-card:hover .p-line{opacity:1;transform:scaleX(1)}
+.p-num{font-family:'Playfair Display',serif;font-size:88px;font-weight:900;line-height:1;color:rgba(255,255,255,.03);margin-bottom:18px;transition:color .4s}
+.p-card:hover .p-num{color:rgba(56,190,255,.06)}
+.p-icon{width:56px;height:56px;border-radius:16px;background:rgba(26,86,255,.18);border:1px solid rgba(26,86,255,.28);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:22px;transition:all .4s}
+.p-card:hover .p-icon{background:linear-gradient(135deg,var(--royal),var(--blue));border-color:transparent;box-shadow:0 8px 28px rgba(26,86,255,.4)}
+.p-card h3{font-family:'Playfair Display',serif;font-size:clamp(20px,2.3vw,26px);font-weight:800;color:white;margin-bottom:14px;line-height:1.25}
+.p-card p{font-size:clamp(14px,1.5vw,15px);font-weight:300;color:rgba(255,255,255,.36);line-height:1.9}
+.p-proof{display:inline-flex;align-items:center;gap:7px;margin-top:18px;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:var(--green);font-size:11px;font-weight:700;padding:6px 14px;border-radius:50px}
+
+/* PROCESS */
+.process-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px);align-items:center}
+.process-steps{display:flex;flex-direction:column}
+.proc-step{display:flex;gap:26px;padding:clamp(24px,3vw,38px) 0;border-bottom:1px solid var(--border);transition:all .3s}
+.proc-step:last-child{border-bottom:none}
+.proc-step-n{font-family:'Playfair Display',serif;font-size:13px;font-weight:800;color:var(--muted);min-width:28px;padding-top:3px;transition:color .3s}
+.proc-step:hover .proc-step-n{color:var(--sky)}
+.proc-body h4{font-family:'Playfair Display',serif;font-size:clamp(19px,2.2vw,24px);font-weight:800;color:white;margin-bottom:9px}
+.proc-body p{font-size:clamp(14px,1.5vw,15px);font-weight:300;color:rgba(255,255,255,.36);line-height:1.85}
+.proc-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.proc-glow{position:absolute;width:380px;height:380px;background:radial-gradient(circle,rgba(26,86,255,.18) 0%,transparent 70%);border-radius:50%}
+.proc-card{background:linear-gradient(160deg,#0D1A3D,#071330);border:1px solid rgba(56,190,255,.12);border-radius:26px;padding:clamp(24px,3vw,36px);width:100%;max-width:380px;position:relative;z-index:2;box-shadow:0 40px 100px rgba(0,0,0,.45)}
+.pc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.pc-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:800;color:white}
+.pc-badge{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);color:var(--green);font-size:11px;font-weight:700;padding:5px 12px;border-radius:50px;display:flex;align-items:center;gap:5px}
+.pc-badge::before{content:'●';font-size:7px}
+.pc-row{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:11px;display:flex;justify-content:space-between;align-items:center}
+.pc-row-label{font-size:12px;color:var(--muted)}
+.pc-row-val{font-family:'Playfair Display',serif;font-size:21px;font-weight:800;color:white}
+.pc-row-val.gold{color:var(--gold)}.pc-row-val.sky{color:var(--sky);font-size:15px}.pc-row-val.green{color:var(--green)}
+.pc-bar{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:11px}
+.pc-bar-top{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px}
+.pc-track{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
+.pc-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--royal),var(--sky));background-size:200%;animation:shimmer 3s linear infinite}
+.pc-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.pc-tag{font-size:10px;font-weight:600;padding:5px 12px;border-radius:50px;background:rgba(56,190,255,.08);border:1px solid rgba(56,190,255,.15);color:var(--sky)}
+
+/* TRUST */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,18px);margin-top:clamp(44px,6vw,72px)}
+.trust-card{background:var(--ink);border:1px solid var(--border);border-radius:22px;padding:clamp(24px,3.5vw,38px) clamp(18px,2.5vw,28px);text-align:center;transition:all .4s}
+.trust-card:hover{border-color:rgba(56,190,255,.22);transform:translateY(-7px);box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.tc-icon{font-size:34px;margin-bottom:16px;display:block;animation:float 5s ease-in-out infinite}
+.trust-card h4{font-family:'Playfair Display',serif;font-size:clamp(16px,1.8vw,19px);font-weight:800;color:white;margin-bottom:10px;line-height:1.35}
+.trust-card p{font-size:13px;font-weight:300;color:rgba(255,255,255,.36);line-height:1.8}
+
+/* WHO */
+.who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,18px);margin-top:clamp(44px,6vw,72px)}
+.who-card{background:var(--navy);border:1px solid var(--border);border-radius:22px;padding:clamp(28px,4vw,42px) clamp(20px,3vw,30px);text-align:center;transition:all .45s;position:relative;overflow:hidden}
+.who-card::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(26,86,255,.09),transparent);opacity:0;transition:opacity .4s}
+.who-card:hover{border-color:rgba(26,86,255,.38);transform:translateY(-9px);box-shadow:0 28px 70px rgba(0,0,0,.45)}
+.who-card:hover::after{opacity:1}
+.who-emoji{font-size:clamp(40px,5.5vw,54px);margin-bottom:16px;display:block;animation:float 4.5s ease-in-out infinite}
+.who-card h4{font-family:'Playfair Display',serif;font-size:clamp(17px,2vw,21px);font-weight:800;color:white;margin-bottom:10px}
+.who-card p{font-size:13px;font-weight:300;color:rgba(255,255,255,.36);line-height:1.8}
+.who-badge{display:inline-block;margin-top:16px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:50px;background:rgba(56,190,255,.08);border:1px solid rgba(56,190,255,.16);color:var(--sky)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(44px,7vw,100px);align-items:start}
+.c-left h2{font-family:'Playfair Display',serif;font-size:clamp(34px,4.8vw,60px);font-weight:900;line-height:1.07;letter-spacing:-1.2px;color:white;margin-bottom:18px}
+.c-left h2 em{font-style:italic;color:var(--gold)}
+.c-left h2 .g{color:var(--green)}
+.c-left>p{font-size:clamp(15px,1.7vw,17px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;margin-bottom:clamp(28px,4vw,42px)}
+.c-trust-list{display:flex;flex-direction:column;gap:12px}
+.c-trust-item{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:16px;padding:clamp(14px,2vw,17px) clamp(16px,2.5vw,20px);transition:all .3s}
+.c-trust-item:hover{border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.04)}
+.cti-icon{width:40px;height:40px;flex-shrink:0;border-radius:11px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);display:flex;align-items:center;justify-content:center;font-size:18px}
+.cti-body h5{font-size:14px;font-weight:600;color:white;margin-bottom:3px}
+.cti-body p{font-size:12px;font-weight:300;color:var(--muted);line-height:1.6}
+
+/* FORM */
+.form-box{background:linear-gradient(160deg,#0C1B3B,#060D1A);border:1px solid rgba(56,190,255,.11);border-radius:34px;padding:clamp(30px,4.5vw,52px) clamp(24px,3.5vw,44px);box-shadow:0 56px 110px rgba(0,0,0,.5);position:relative;overflow:hidden}
+.form-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--sky),rgba(201,168,76,.5),transparent)}
+.f-title{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,30px);font-weight:800;color:white;margin-bottom:6px}
+.f-sub{font-size:13px;font-weight:300;color:var(--muted);margin-bottom:clamp(22px,3vw,32px);line-height:1.7}
+.f-group{margin-bottom:14px}
+.f-label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:7px}
+.f-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:clamp(13px,1.6vw,16px) 18px;color:white;font-family:'Outfit',sans-serif;font-size:15px;font-weight:300;outline:none;transition:all .3s}
+.f-input::placeholder{color:rgba(255,255,255,.18)}
+.f-input:focus{border-color:rgba(56,190,255,.36);background:rgba(56,190,255,.05);box-shadow:0 0 0 3px rgba(56,190,255,.07)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.f-submit{width:100%;margin-top:8px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 50%,var(--gold) 100%);background-size:200% auto;color:var(--ink);font-family:'Outfit',sans-serif;font-size:clamp(15px,1.8vw,17px);font-weight:700;padding:clamp(15px,2vw,18px);border-radius:13px;box-shadow:0 8px 30px rgba(201,168,76,.3);transition:all .4s;animation:shimmer 3s linear infinite;letter-spacing:.3px;cursor:pointer;border:none}
+.f-submit:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(201,168,76,.45)}
+.f-submit:disabled{opacity:.6;transform:none;cursor:not-allowed}
+.f-note{text-align:center;font-size:11px;font-weight:300;color:rgba(255,255,255,.2);margin-top:14px;line-height:1.7}
+
+/* SUCCESS CARD */
+.success-screen{display:none;text-align:center;padding:clamp(36px,5vw,52px) 20px}
+.success-icon-wrap{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));border:2px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;animation:float 3s ease-in-out infinite}
+.success-checkmark{font-size:42px}
+.success-screen h3{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,30px);font-weight:800;color:white;margin-bottom:10px}
+.success-screen p{font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:24px}
+.success-pills{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.success-pill{display:flex;align-items:center;gap:10px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.15);border-radius:12px;padding:11px 16px}
+.success-pill span{font-size:13px;color:rgba(255,255,255,.6)}
+.success-pill::before{content:'✓';color:var(--green);font-weight:700;font-size:13px;flex-shrink:0}
+
+/* FINAL BANNER */
+.final-banner{background:linear-gradient(135deg,#092CC0,#0D40E8,#092CC0);padding:clamp(70px,10vw,120px) clamp(20px,5vw,64px);text-align:center;position:relative;overflow:hidden}
+.fb-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:64px 64px;opacity:.5}
+.fb-glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 75% at 50% 50%,rgba(56,190,255,.14) 0%,transparent 65%)}
+.final-banner>*{position:relative;z-index:2}
+.fb-eyebrow{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:8px 20px;border-radius:50px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px}
+.final-banner h2{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,72px);font-weight:900;color:white;letter-spacing:-1.5px;line-height:1.06;margin-bottom:16px}
+.final-banner h2 em{font-style:italic;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
+.final-banner p{font-size:clamp(15px,1.9vw,19px);color:rgba(255,255,255,.52);margin-bottom:clamp(36px,5vw,52px)}
+.fb-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:10px;background:white;color:var(--royal);font-family:'Outfit',sans-serif;font-size:clamp(15px,1.8vw,17px);font-weight:700;padding:clamp(15px,2vw,19px) clamp(28px,4vw,46px);border-radius:50px;box-shadow:0 10px 42px rgba(0,0,0,.25);transition:all .4s;text-decoration:none}
+.btn-white:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(0,0,0,.35)}
+.btn-border{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.25);color:white;font-family:'Outfit',sans-serif;font-size:clamp(14px,1.6vw,16px);font-weight:600;padding:clamp(14px,1.8vw,18px) clamp(24px,3vw,38px);border-radius:50px;transition:all .3s;text-decoration:none}
+.btn-border:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+
+@media(max-width:1060px){.hero-inner{grid-template-columns:1fr}.hero-right{display:none}.hero-stats{grid-column:auto}.process-wrap{grid-template-columns:1fr}.proc-visual{display:none}.trust-grid{grid-template-columns:1fr 1fr}.who-grid{grid-template-columns:1fr 1fr}.contact-grid{grid-template-columns:1fr}.promise-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.trust-grid{grid-template-columns:1fr}.who-grid{grid-template-columns:1fr 1fr}.f-row{grid-template-columns:1fr}.fb-btns{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}.btn-white,.btn-border{justify-content:center}.hs-sep{display:none}}
+@media(max-width:420px){.who-grid{grid-template-columns:1fr}}
+</style>
+
+  <!-- SEO & OG Meta -->
+  <meta name="description" content="LucroFeX — Turn your Telegram channel, Instagram or YouTube audience into real monthly income. Zero investment. We handle everything.">
+  <meta name="keywords" content="audience monetization, telegram channel monetize, creator income, LucroFeX, zero investment earning">
+  <meta property="og:title" content="LucroFeX — Your Audience. Our System. Your Earnings.">
+  <meta property="og:description" content="Turn your social media audience into monthly income with zero investment. LucroFeX handles everything.">
+  <meta property="og:url" content="https://lucrofex.chauhandeveloper.in/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://lucrofex.chauhandeveloper.in/">
+</head>
+<body>
+
+<!-- TRUST RIBBON -->
+<!-- DRAWER -->
+<div class="drawer" id="drawer">
+  <button class="drawer-x" id="drawerX">✕</button>
+  <a href="pages/promise.html" onclick="closeDrawer()">Our Promise</a>
+  <a href="pages/how-it-works.html" onclick="closeDrawer()">How It Works</a>
+  <a href="pages/trust.html" onclick="closeDrawer()">Why Trust Us</a>
+  <a href="pages/who-can-join.html" onclick="closeDrawer()">Who Can Join</a>
+  <a href="pages/about.html" onclick="closeDrawer()">About Us</a>
+  <a href="pages/contact.html" onclick="closeDrawer()" style="color:var(--gold)">Start Earning →</a>
+</div>
+
+<!-- NAV -->
+<header id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <img src="logo.svg" alt="LucroFeX" style="height:42px;width:auto">
+    </a>
+    <ul class="nav-links">
+      <li><a href="pages/promise.html">Our Promise</a></li>
+      <li><a href="pages/how-it-works.html">How It Works</a></li>
+      <li><a href="pages/trust.html">Why Trust Us</a></li>
+      <li><a href="pages/who-can-join.html">Who Can Join</a></li>
+      <li><a href="pages/about.html">About Us</a></li>
+      <li><a href="pages/contact.html" class="nav-pill">Start Earning Today</a></li>
+    </ul>
+    <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow"><span class="live-dot"></span>Accepting New Partners — Spots Limited</div>
+      <h1>You Have an Audience.<br>We Turn It Into<br><em>Real Monthly Income.</em></h1>
+      <p class="hero-sub"><strong>Zero investment. Zero technical work. Zero risk.</strong><br>Whether you own a Telegram channel, Instagram page, or YouTube channel — if people trust you, we have a system that pays you every month. <strong>Just contact us. We handle everything else.</strong></p>
+      <div class="hero-actions">
+        <a href="pages/contact.html" class="btn-gold">Start Earning Today — It's Free →</a>
+        <a href="https://wa.me/919785121781?text=Hi%20LucroFeX%2C%20I%20want%20to%20monetize%20my%20audience." class="btn-wa" target="_blank" rel="noopener">💬 &nbsp;Chat on WhatsApp</a>
+        <p class="hero-caption">No fees. No contracts. No technical knowledge needed.</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="dash-card">
+        <div class="dc-head"><span class="dc-title">Partner Dashboard</span><span class="dc-live"><span class="dc-live-dot"></span>Live</span></div>
+        <div class="dc-grid">
+          <div class="dc-stat"><div class="dc-val gold">₹ 0</div><div class="dc-label">Your Investment</div></div>
+          <div class="dc-stat"><div class="dc-val green">Active</div><div class="dc-label">Status</div></div>
+          <div class="dc-stat"><div class="dc-val sky">24hr</div><div class="dc-label">To Go Live</div></div>
+        </div>
+        <div class="dc-bar-row"><div class="dc-bar-top"><span>Audience Engagement</span><span>84%</span></div><div class="dc-track"><div class="dc-fill" style="width:84%"></div></div></div>
+        <div class="dc-bar-row" style="margin-top:10px"><div class="dc-bar-top"><span>Revenue Running</span><span>97%</span></div><div class="dc-track"><div class="dc-fill" style="width:97%"></div></div></div>
+        <div class="dc-tags"><span class="dc-tag green">✓ App Live</span><span class="dc-tag blue">✓ Fully Managed</span><span class="dc-tag gold">✓ Monthly Payout</span></div>
+      </div>
+      <div class="notif-pop"><span class="np-icon">🎉</span><div><div class="np-title">New Partner Joined Just Now</div><div class="np-sub">Telegram Channel · 18,000 subscribers · Onboarded today</div></div><span class="np-badge">NEW</span></div>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item"><div class="hs-val">500<span>+</span></div><div class="hs-label">Active Partners</div></div>
+      <div class="hs-sep"></div>
+      <div class="hs-item"><div class="hs-val">₹<span>0</span></div><div class="hs-label">Investment Required</div></div>
+      <div class="hs-sep"></div>
+      <div class="hs-item"><div class="hs-val">24<span>hr</span></div><div class="hs-label">Onboarding Time</div></div>
+      <div class="hs-sep"></div>
+      <div class="hs-item"><div class="hs-val">100<span>%</span></div><div class="hs-label">Managed By Us</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap"><div class="ticker-track"><span class="tk-item">Telegram Channel Owners</span><span class="tk-item">Instagram Influencers</span><span class="tk-item">YouTube Creators</span><span class="tk-item">Zero Investment</span><span class="tk-item">Monthly Earnings</span><span class="tk-item">100% Managed By Us</span><span class="tk-item">No Fraud — Verified</span><span class="tk-item">Join Today — Free</span><span class="tk-item">Telegram Channel Owners</span><span class="tk-item">Instagram Influencers</span><span class="tk-item">YouTube Creators</span><span class="tk-item">Zero Investment</span><span class="tk-item">Monthly Earnings</span><span class="tk-item">100% Managed By Us</span><span class="tk-item">No Fraud — Verified</span><span class="tk-item">Join Today — Free</span></div></div>
+
+<!-- PROMISE -->
+<section class="page-section alt">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="eyebrow gold">We Promise This — And We Deliver</div>
+      <h2 class="s-title">Three Commitments We Make<br>to <em>Every Partner.</em></h2>
+      <p class="s-desc" style="margin:0 auto;text-align:center;max-width:560px">We know what you're thinking — "sounds too good, kuch toh pakad hoga." There is none. These three promises are the foundation of every partnership.</p>
+    </div>
+    <div class="promise-grid">
+      <div class="p-card reveal"><div class="p-line"></div><div class="p-num">01</div><div class="p-icon">⚡</div><h3>Zero Investment.<br>Not Now. Not Ever.</h3><p>Not a single rupee from your pocket — not to start, not to run, not to scale. We build your platform at our own cost because we earn only when you earn.</p><div class="p-proof">✓ Verified by 500+ Partners</div></div>
+      <div class="p-card reveal d1"><div class="p-line"></div><div class="p-num">02</div><div class="p-icon">🛡️</div><h3>Every Technical Task<br>Is Completely Ours.</h3><p>Building, hosting, updates, security, monetization — every single technical responsibility is handled by our team. You never touch a line of code.</p><div class="p-proof">✓ 100% Managed By Our Team</div></div>
+      <div class="p-card reveal d2"><div class="p-line"></div><div class="p-num">03</div><div class="p-icon">💰</div><h3>Your Revenue Tracked Live.<br>Paid On Time.</h3><p>Every rupee you earn is visible in your dashboard in real time. Fixed monthly payouts, transparent breakdowns, no surprises. Ever.</p><div class="p-proof">✓ Monthly Payouts On Schedule</div></div>
+    </div>
+    <div style="text-align:center;margin-top:40px"><a href="pages/promise.html" class="btn-blue">Read Full Promise →</a></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="page-section">
+  <div class="container">
+    <div class="process-wrap">
+      <div>
+        <div class="reveal"><div class="eyebrow">How It Works</div><h2 class="s-title">Your Only Job Is<br>to <span>Contact Us.</span><br>We Do the Rest.</h2><p class="s-desc" style="margin-bottom:44px">Your entire role in this partnership is one action: reach out to us. Everything that follows is handled completely by our team.</p></div>
+        <div class="process-steps">
+          <div class="proc-step reveal"><span class="proc-step-n">01</span><div class="proc-body"><h4>Just Reach Out — That's All</h4><p>Send us your name, platform link, and audience size. We respond within 24 hours with a clear, personalised plan — no obligation, no pressure.</p></div></div>
+          <div class="proc-step reveal d1"><span class="proc-step-n">02</span><div class="proc-body"><h4>We Build Your Entire Platform</h4><p>A fully branded app tailored to your niche — designed, developed, and deployed by us. Your name. Your community. Our work.</p></div></div>
+          <div class="proc-step reveal d2"><span class="proc-step-n">03</span><div class="proc-body"><h4>Share It. Watch Earnings Come In.</h4><p>Share your platform with followers. Our revenue system runs silently in the background. Fixed payment lands in your account every month.</p></div></div>
+        </div>
+        <div style="margin-top:36px"><a href="pages/how-it-works.html" class="btn-blue">See Full Process →</a></div>
+      </div>
+      <div class="proc-visual reveal d1">
+        <div class="proc-glow"></div>
+        <div class="proc-card">
+          <div class="pc-head"><span class="pc-title">Partner Overview</span><span class="pc-badge">Live</span></div>
+          <div class="pc-row"><div><div class="pc-row-label">Your Audience</div><div class="pc-row-val">48,200</div></div><div style="text-align:right"><div class="pc-row-label">Active Users</div><div class="pc-row-val green">31,540</div></div></div>
+          <div class="pc-row"><div><div class="pc-row-label">Your Investment</div><div class="pc-row-val gold">₹ 0.00</div></div><div style="text-align:right"><div class="pc-row-label">Status</div><div class="pc-row-val sky">Fully Managed</div></div></div>
+          <div class="pc-bar"><div class="pc-bar-top"><span>Platform Engagement</span><span>79%</span></div><div class="pc-track"><div class="pc-fill" style="width:79%"></div></div></div>
+          <div class="pc-tags"><span class="pc-tag">App Live ✓</span><span class="pc-tag">Ads Active ✓</span><span class="pc-tag">Payment Scheduled ✓</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="page-section alt">
+  <div class="container">
+    <div class="text-center reveal"><div class="eyebrow green">Fraud Nahi Hai — Yeh Proof Hai</div><h2 class="s-title">Why Thousands of Creators<br><em>Trust Our System</em></h2><p class="s-desc" style="margin:0 auto;text-align:center;max-width:540px">We don't ask for blind trust. We give you every reason to verify, question, and decide freely.</p></div>
+    <div class="trust-grid">
+      <div class="trust-card reveal"><span class="tc-icon">🔒</span><h4>No Contracts. No Lock-Ins. Ever.</h4><p>Leave any time, zero penalty, zero friction. You stay because results keep you here.</p></div>
+      <div class="trust-card reveal d1"><span class="tc-icon">📊</span><h4>Your Numbers. Live. Always.</h4><p>Every user, every rupee — tracked in real time in your personal admin panel. No guessing.</p></div>
+      <div class="trust-card reveal d2"><span class="tc-icon">🤝</span><h4>We Only Earn When You Earn.</h4><p>No subscription fee collected regardless of performance. Your growth is our only incentive.</p></div>
+      <div class="trust-card reveal d3"><span class="tc-icon">👨‍💼</span><h4>A Real Person Manages Your Account.</h4><p>A dedicated partner manager assigned from day one. Questions answered in hours, not days.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:40px"><a href="pages/trust.html" class="btn-blue">See All Trust Guarantees →</a></div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="page-section">
+  <div class="container">
+    <div class="text-center reveal"><div class="eyebrow">Who Can Join</div><h2 class="s-title">If Your Audience Trusts You,<br>You <em>Already Qualify.</em></h2><p class="s-desc" style="margin:0 auto;text-align:center;max-width:520px">Your niche doesn't matter. What matters is that real people follow you, trust you, and engage with you.</p></div>
+    <div class="who-grid">
+      <div class="who-card reveal"><span class="who-emoji">📢</span><h4>Telegram Channel Owners</h4><p>News, finance, memes, education — any channel where subscribers genuinely read what you post</p><span class="who-badge">Most Popular ⚡</span></div>
+      <div class="who-card reveal d1"><span class="who-emoji">📸</span><h4>Instagram Creators</h4><p>Lifestyle, fitness, food, comedy — influencers whose followers actually engage and click</p><span class="who-badge">High Engagement</span></div>
+      <div class="who-card reveal d2"><span class="who-emoji">🎬</span><h4>YouTube Channels</h4><p>Tech, vlogs, education — channels with subscribers who return every time you upload</p><span class="who-badge">Massive Reach</span></div>
+      <div class="who-card reveal d3"><span class="who-emoji">🌐</span><h4>Any Community Leader</h4><p>WhatsApp, Facebook, Twitter — anywhere you hold the attention of a real, loyal audience</p><span class="who-badge">All Platforms</span></div>
+    </div>
+    <div style="text-align:center;margin-top:40px"><a href="pages/who-can-join.html" class="btn-blue">Check If You Qualify →</a></div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-banner">
+  <div class="fb-grid"></div><div class="fb-glow"></div>
+  <div class="fb-eyebrow">⚡ Don't Wait — Every Day is Potential Income Lost</div>
+  <h2>Your Audience Is Ready.<br>Are <em>You?</em></h2>
+  <p>Thousands of creators have already started. The only thing between you and monthly earnings is one message.</p>
+  <div class="fb-btns">
+    <a href="pages/contact.html" class="btn-white">🚀 &nbsp;Start Earning Today — Free</a>
+    <a href="https://wa.me/919785121781?text=Hi%20LucroFeX%2C%20I%20want%20to%20monetize%20my%20audience." class="btn-border" target="_blank" rel="noopener">💬 &nbsp;WhatsApp Us Now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div><a href="index.html" class="logo">
+        <img src="logo.svg" alt="LucroFeX" style="height:38px;width:auto">
+      </a><p class="ft-desc">Helping creators and community leaders turn their existing audiences into consistent monthly income — with zero investment and complete simplicity.</p></div>
+      <div><div class="ft-h">Company</div><ul class="ft-ul"><li><a href="pages/about.html">About Us</a></li><li><a href="pages/contact.html">Contact Us</a></li><li><a href="pages/promise.html">Our Promise</a></li></ul></div>
+      <div><div class="ft-h">Legal</div><ul class="ft-ul"><li><a href="pages/privacy.html">Privacy Policy</a></li><li><a href="pages/terms.html">Terms of Service</a></li><li><a href="pages/partner-agreement.html">Partner Agreement</a></li></ul></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 LucroFeX — Powered by LucroFeX. All rights reserved. 🇮🇳 Made in India.</p><div class="socials"><a href="https://linkedin.com" class="soc" target="_blank">in</a><a href="https://twitter.com" class="soc" target="_blank">𝕏</a><a href="https://youtube.com" class="soc" target="_blank">▶</a><a href="https://t.me" class="soc" target="_blank">✈</a></div></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/919785121781?text=Hi%20LucroFeX%2C%20I%20want%20to%20monetize%20my%20audience." class="wa-float" target="_blank" rel="noopener"><div class="wa-ping"></div>💬</a>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50),{passive:true});
+document.getElementById('ham').onclick=()=>document.getElementById('drawer').classList.add('open');
+document.getElementById('drawerX').onclick=closeDrawer;
+function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
+(function(){const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}})},{threshold:.09});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))})();
+</script>
+
+<!-- PRIVACY CONSENT POPUP -->
+<div class="privacy-overlay" id="privacyOverlay">
+  <div class="privacy-box">
+    <div class="pb-top">
+      <div class="pb-icon">🔒</div>
+      <div>
+        <div class="pb-title">We Value Your Privacy</div>
+        <p class="pb-desc">
+          LucroFeX uses cookies and collects basic data to improve your experience and process partner applications.
+          By continuing, you agree to our
+          <a href="pages/privacy.html">Privacy Policy</a>,
+          <a href="pages/terms.html">Terms of Service</a>, and
+          <a href="pages/partner-agreement.html">Partner Agreement</a>.
+          We never sell your data. Ever.
+        </p>
+      </div>
+    </div>
+    <div class="pb-btns">
+      <button class="pb-accept" onclick="acceptPrivacy()">✓ &nbsp;I Accept — Let Me In</button>
+      <button class="pb-decline" onclick="declinePrivacy()">No Thanks</button>
+    </div>
+    <div class="pb-links">
+      <span class="pb-link" onclick="window.open('pages/privacy.html')">Privacy Policy</span>
+      <span class="pb-link" onclick="window.open('pages/terms.html')">Terms of Service</span>
+      <span class="pb-link" onclick="window.open('pages/partner-agreement.html')">Partner Agreement</span>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('lf_privacy_accepted')){
+    document.getElementById('privacyOverlay').classList.remove('hidden');
+  } else {
+    document.getElementById('privacyOverlay').classList.add('hidden');
+  }
+})();
+function acceptPrivacy(){
+  localStorage.setItem('lf_privacy_accepted','true');
+  var el=document.getElementById('privacyOverlay');
+  el.style.opacity='0';el.style.transition='opacity .4s';
+  setTimeout(function(){el.classList.add('hidden');},400);
+}
+function declinePrivacy(){
+  window.location.href='https://www.google.com';
+}
+</script>
+
+</body>
+</html>
