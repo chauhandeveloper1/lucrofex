@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Agreement — LucroFeX</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+.page-section{padding:clamp(70px,10vw,120px) 0}
+.page-section.alt{background:var(--deep)}
+.inner-card{background:var(--navy);border:1px solid var(--border);border-radius:24px;padding:clamp(28px,4vw,48px);transition:all .4s}
+.inner-card:hover{border-color:rgba(56,190,255,.2);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.inner-card h3{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,26px);font-weight:800;color:white;margin-bottom:12px}
+.inner-card p{font-size:15px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.9}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,24px);margin-top:clamp(40px,6vw,64px)}
+.prose{max-width:780px;margin:0 auto}
+.prose h3{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,28px);font-weight:800;color:white;margin:44px 0 14px}
+.prose p{font-size:16px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.95;margin-bottom:16px}
+.prose ul{margin:12px 0 20px;display:flex;flex-direction:column;gap:9px;list-style:none}
+.prose ul li{font-size:15px;color:rgba(255,255,255,.42);padding-left:22px;position:relative;line-height:1.7}
+.prose ul li::before{content:'→';position:absolute;left:0;color:var(--sky)}
+.prose .last-upd{font-size:12px;color:var(--muted);margin-bottom:32px;padding:10px 16px;background:rgba(255,255,255,.04);border-radius:8px;display:inline-block}
+.check-row{display:flex;align-items:flex-start;gap:16px;padding:clamp(18px,3vw,28px) 0;border-bottom:1px solid var(--border)}
+.check-row:last-child{border-bottom:none}
+.check-box{width:30px;height:30px;flex-shrink:0;border-radius:9px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.22);display:flex;align-items:center;justify-content:center;color:var(--green);font-size:14px;font-weight:700;margin-top:2px}
+.check-row h4{font-family:'Playfair Display',serif;font-size:clamp(18px,2.2vw,22px);font-weight:800;color:white;margin-bottom:8px}
+.check-row p{font-size:15px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.85}
+.step-big{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:clamp(24px,3.5vw,40px) 0;border-bottom:1px solid var(--border)}
+.step-big:last-child{border-bottom:none}
+.step-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--ink);flex-shrink:0;box-shadow:0 8px 24px rgba(201,168,76,.35)}
+.step-big h4{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,26px);font-weight:800;color:white;margin-bottom:10px}
+.step-big p{font-size:15px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.9}
+.cta-strip{background:linear-gradient(135deg,#092CC0,#0D40E8,#092CC0);border-radius:28px;padding:clamp(44px,6vw,72px) clamp(28px,5vw,64px);text-align:center;position:relative;overflow:hidden;margin-top:clamp(60px,8vw,90px)}
+.cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(56,190,255,.15) 0%,transparent 70%)}
+.cta-strip > *{position:relative;z-index:2}
+.cta-strip h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:900;color:white;margin-bottom:14px;letter-spacing:-1px}
+.cta-strip p{font-size:clamp(14px,1.7vw,17px);color:rgba(255,255,255,.5);margin-bottom:32px}
+.cta-strip-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.who-big{background:var(--navy);border:1px solid var(--border);border-radius:24px;padding:clamp(28px,4vw,48px);transition:all .4s;position:relative;overflow:hidden}
+.who-big:hover{border-color:rgba(56,190,255,.25);transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,.45)}
+.who-big-emoji{font-size:clamp(52px,7vw,72px);margin-bottom:18px;display:block;animation:float 4.5s ease-in-out infinite}
+.who-big h3{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,30px);font-weight:800;color:white;margin-bottom:12px}
+.who-big p{font-size:15px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.9;margin-bottom:14px}
+.who-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:1px;padding:6px 14px;border-radius:50px}
+.tag-blue{background:rgba(56,190,255,.08);border:1px solid rgba(56,190,255,.18);color:var(--sky)}
+.tag-gold{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);color:var(--gold)}
+.tag-green{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.18);color:var(--green)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(44px,7vw,100px);align-items:start}
+.f-title{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,30px);font-weight:800;color:white;margin-bottom:6px}
+.f-sub{font-size:13px;font-weight:300;color:var(--muted);margin-bottom:clamp(22px,3vw,32px);line-height:1.7}
+.f-group{margin-bottom:14px}
+.f-label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:7px}
+.f-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:clamp(13px,1.6vw,16px) 18px;color:white;font-family:'Outfit',sans-serif;font-size:15px;font-weight:300;outline:none;transition:all .3s}
+.f-input::placeholder{color:rgba(255,255,255,.18)}
+.f-input:focus{border-color:rgba(56,190,255,.36);background:rgba(56,190,255,.05);box-shadow:0 0 0 3px rgba(56,190,255,.07)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.f-submit{width:100%;margin-top:8px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 50%,var(--gold) 100%);background-size:200% auto;color:var(--ink);font-family:'Outfit',sans-serif;font-size:clamp(15px,1.8vw,17px);font-weight:700;padding:clamp(15px,2vw,18px);border-radius:13px;box-shadow:0 8px 30px rgba(201,168,76,.3);transition:all .4s;animation:shimmer 3s linear infinite;letter-spacing:.3px;cursor:pointer;border:none}
+.f-submit:hover{transform:translateY(-3px);box-shadow:0 20px 50px rgba(201,168,76,.45)}
+.f-submit:disabled{opacity:.6;transform:none;cursor:not-allowed}
+.f-note{text-align:center;font-size:11px;font-weight:300;color:rgba(255,255,255,.2);margin-top:14px;line-height:1.7}
+.form-box{background:linear-gradient(160deg,#0C1B3B,#060D1A);border:1px solid rgba(56,190,255,.11);border-radius:34px;padding:clamp(30px,4.5vw,52px) clamp(24px,3.5vw,44px);box-shadow:0 56px 110px rgba(0,0,0,.5);position:relative;overflow:hidden}
+.form-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--sky),rgba(201,168,76,.5),transparent)}
+.success-screen{display:none;text-align:center;padding:clamp(36px,5vw,52px) 20px}
+.success-icon-wrap{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05));border:2px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 0 40px rgba(34,197,94,.15)}
+.success-checkmark{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--green)}
+.success-screen h3{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,32px);font-weight:800;color:white;margin-bottom:10px}
+.success-screen p{font-size:16px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:24px}
+.success-pills{display:flex;flex-direction:column;gap:9px;margin-top:4px;text-align:left}
+.success-pill{display:flex;align-items:center;gap:12px;background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.16);border-radius:12px;padding:13px 16px}
+.success-pill::before{content:'✓';color:var(--green);font-weight:700;font-size:14px;flex-shrink:0}
+.success-pill span{font-size:14px;color:rgba(255,255,255,.55);font-weight:300}
+.c-trust-item{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:16px;padding:clamp(14px,2vw,17px) clamp(16px,2.5vw,20px);transition:all .3s;margin-bottom:12px}
+.c-trust-item:hover{border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.04)}
+.cti-icon{width:40px;height:40px;flex-shrink:0;border-radius:11px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);display:flex;align-items:center;justify-content:center;font-size:18px}
+.cti-body h5{font-size:14px;font-weight:600;color:white;margin-bottom:3px}
+.cti-body p{font-size:12px;font-weight:300;color:var(--muted);line-height:1.6}
+@media(max-width:900px){.grid-2{grid-template-columns:1fr}.contact-wrap{grid-template-columns:1fr}.step-big{grid-template-columns:48px 1fr;gap:16px}}
+@media(max-width:500px){.f-row{grid-template-columns:1fr}.cta-strip-btns{flex-direction:column;align-items:stretch}}
+</style>
+
+  <!-- SEO & OG Meta -->
+  <meta name="description" content="LucroFeX — Turn your Telegram channel, Instagram or YouTube audience into real monthly income. Zero investment. We handle everything.">
+  <meta name="keywords" content="audience monetization, telegram channel monetize, creator income, LucroFeX, zero investment earning">
+  <meta property="og:title" content="LucroFeX — Your Audience. Our System. Your Earnings.">
+  <meta property="og:description" content="Turn your social media audience into monthly income with zero investment. LucroFeX handles everything.">
+  <meta property="og:url" content="https://lucrofex.chauhandeveloper.in/pages/partner-agreement.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://lucrofex.chauhandeveloper.in/pages/partner-agreement.html">
+</head>
+<body>
+<div class="drawer" id="drawer">
+  <button class="drawer-x" id="drawerX">✕</button>
+  <a href='promise.html' onclick='closeDrawer()'>Our Promise</a><a href='how-it-works.html' onclick='closeDrawer()'>How It Works</a><a href='trust.html' onclick='closeDrawer()'>Why Trust Us</a><a href='who-can-join.html' onclick='closeDrawer()'>Who Can Join</a><a href='about.html' onclick='closeDrawer()'>About Us</a>
+  <a href="contact.html" onclick="closeDrawer()" style="color:var(--gold)">Start Earning →</a>
+</div>
+<header id="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">
+      <img src="../logo.svg" alt="LucroFeX" style="height:42px;width:auto">
+    </a>
+    <ul class="nav-links"><li><a href='promise.html'>Our Promise</a></li><li><a href='how-it-works.html'>How It Works</a></li><li><a href='trust.html'>Why Trust Us</a></li><li><a href='who-can-join.html'>Who Can Join</a></li><li><a href='about.html'>About Us</a></li><li><a href="contact.html" class="nav-pill">Start Earning Today</a></li></ul>
+    <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="page-hero"><div class="page-hero-bg"></div><div class="page-hero-content">
+<div class="page-eyebrow">Legal</div>
+<h1>Partner <em>Agreement</em></h1>
+<p>The standard terms of the revenue-sharing partnership between LucroFeX and our creator partners.</p>
+</div></div>
+<section class="page-section alt">
+<div class="container">
+<div class="prose reveal">
+<p class="last-upd">Last updated: January 2025 &nbsp;·&nbsp; A specific agreement is shared with each partner upon onboarding.</p>
+<h3>1. The Partnership</h3>
+<p>This agreement governs the revenue-sharing partnership between LucroFeX ("we", "us", "the Company") and the creator partner ("you", "the Partner"). The partnership involves: the Company building and managing a branded monetisation platform for the Partner, and distributing a share of the revenue generated by that platform to the Partner on a monthly basis.</p>
+<h3>2. Investment and Costs</h3>
+<p>The Partner is not required to make any financial investment at any stage of the partnership. All costs related to platform development, hosting, maintenance, monetisation setup, and management are borne entirely by the Company. There are no setup fees, monthly charges, or any other fees payable by the Partner at any time.</p>
+<h3>3. Partner Responsibilities</h3>
+<ul>
+<li>Sharing the Partner's branded platform link with their audience on their social media channels</li>
+<li>Not engaging in any activity that artificially inflates user numbers or engagement metrics</li>
+<li>Providing accurate information about their audience and platform during the application process</li>
+<li>Maintaining their social media presence and continued audience engagement</li>
+</ul>
+<h3>4. Company Responsibilities</h3>
+<ul>
+<li>Designing, developing, and deploying a fully branded application for the Partner</li>
+<li>Managing all technical infrastructure, hosting, and maintenance</li>
+<li>Implementing and managing all monetisation systems within the platform</li>
+<li>Providing the Partner with a real-time dashboard to track platform performance and revenue</li>
+<li>Distributing the Partner's revenue share on the agreed monthly schedule</li>
+<li>Assigning a dedicated partner manager to the Partner's account</li>
+</ul>
+<h3>5. Revenue Sharing</h3>
+<p>Revenue generated by the Partner's platform is shared between the Company and the Partner. The specific percentage split is agreed upon individually with each Partner and communicated in writing before the partnership begins. Revenue is calculated monthly and transferred to the Partner's designated account on the agreed payment date.</p>
+<h3>6. Termination</h3>
+<p>Either party may terminate this partnership at any time by providing written notice. The Partner is not subject to any financial penalty for termination. Any outstanding revenue owed to the Partner will be paid within 30 days of termination.</p>
+<h3>7. Confidentiality</h3>
+<p>Both parties agree to keep the specific terms of the revenue split confidential. General information about the partnership model may be shared publicly.</p>
+<h3>8. Governing Law</h3>
+<p>This agreement is governed by the laws of India. Any disputes shall be resolved through mutual discussion first, and if unresolved, through arbitration in India.</p>
+<h3>9. Questions</h3>
+<p>For any questions: <a href="mailto:support@chauhandeveloper.in" style="color:var(--sky)">support@chauhandeveloper.in</a> or <a href="https://wa.me/919785121781" target="_blank" rel="noopener" style="color:var(--green)">WhatsApp</a></p>
+</div>
+<div class="cta-strip reveal">
+<h2>Ready to Start the Conversation?</h2>
+<p>Contact us and we'll walk you through everything before you commit to anything.</p>
+<div class="cta-strip-btns"><a href="contact.html" class="btn-gold">Apply to Partner — Free →</a><a href="https://wa.me/919785121781?text=Hi%2C%20I%20have%20questions%20about%20the%20Partner%20Agreement." class="btn-blue" target="_blank" rel="noopener">💬 Ask on WhatsApp</a></div>
+</div>
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="ft-grid">
+      <div><a href="../index.html" class="logo">
+        <img src="../logo.svg" alt="LucroFeX" style="height:38px;width:auto">
+      </a><p class="ft-desc">Helping creators and community leaders turn their audiences into consistent monthly income — zero investment, complete simplicity.</p></div>
+      <div><div class="ft-h">Company</div><ul class="ft-ul"><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="promise.html">Our Promise</a></li></ul></div>
+      <div><div class="ft-h">Legal</div><ul class="ft-ul"><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="partner-agreement.html">Partner Agreement</a></li></ul></div>
+    </div>
+    <div class="ft-bottom"><p>© 2025 LucroFeX — Powered by LucroFeX. All rights reserved. 🇮🇳 Made in India.</p><div class="socials"><a href="https://linkedin.com" class="soc" target="_blank">in</a><a href="https://twitter.com" class="soc" target="_blank">𝕏</a><a href="https://youtube.com" class="soc" target="_blank">▶</a><a href="https://t.me" class="soc" target="_blank">✈</a></div></div>
+  </div>
+</footer>
+<a href="https://wa.me/919785121781?text=Hi%20LucroFeX%2C%20I%20want%20to%20monetize%20my%20audience." class="wa-float" target="_blank" rel="noopener"><div class="wa-ping"></div>💬</a>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('solid',window.scrollY>50)},{passive:true});
+document.getElementById('ham').onclick=function(){document.getElementById('drawer').classList.add('open')};
+document.getElementById('drawerX').onclick=closeDrawer;
+function closeDrawer(){document.getElementById('drawer').classList.remove('open')}
+(function(){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
+  },{threshold:0.09});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+
+
+<!-- PRIVACY CONSENT POPUP -->
+<div class="privacy-overlay" id="privacyOverlay">
+  <div class="privacy-box">
+    <div class="pb-top">
+      <div class="pb-icon">🔒</div>
+      <div>
+        <div class="pb-title">We Value Your Privacy</div>
+        <p class="pb-desc">
+          LucroFeX uses cookies and collects basic data to improve your experience and process partner applications.
+          By continuing, you agree to our
+          <a href="privacy.html">Privacy Policy</a>,
+          <a href="terms.html">Terms of Service</a>, and
+          <a href="partner-agreement.html">Partner Agreement</a>.
+          We never sell your data. Ever.
+        </p>
+      </div>
+    </div>
+    <div class="pb-btns">
+      <button class="pb-accept" onclick="acceptPrivacy()">✓ &nbsp;I Accept — Let Me In</button>
+      <button class="pb-decline" onclick="declinePrivacy()">No Thanks</button>
+    </div>
+    <div class="pb-links">
+      <span class="pb-link" onclick="window.open('privacy.html')">Privacy Policy</span>
+      <span class="pb-link" onclick="window.open('terms.html')">Terms of Service</span>
+      <span class="pb-link" onclick="window.open('partner-agreement.html')">Partner Agreement</span>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if(!localStorage.getItem('lf_privacy_accepted')){
+    document.getElementById('privacyOverlay').classList.remove('hidden');
+  } else {
+    document.getElementById('privacyOverlay').classList.add('hidden');
+  }
+})();
+function acceptPrivacy(){
+  localStorage.setItem('lf_privacy_accepted','true');
+  var el=document.getElementById('privacyOverlay');
+  el.style.opacity='0';el.style.transition='opacity .4s';
+  setTimeout(function(){el.classList.add('hidden');},400);
+}
+function declinePrivacy(){
+  window.location.href='https://www.google.com';
+}
+</script>
+
+</body>
+</html>
