@@ -678,7 +678,11 @@ h2.s-title em{
 ═══════════════════════════════════════ */
 
 @keyframes page-in{from{opacity:0}to{opacity:1}}
-@keyframes rise-in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes rise-in{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes mask-rise{
+  from{opacity:0;transform:translateY(44px);clip-path:inset(0 0 100% 0)}
+  to{opacity:1;transform:none;clip-path:inset(0)}
+}
 @keyframes sweep-in{from{background-size:0% 100%}to{background-size:100% 100%}}
 @keyframes bar-in{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes bar-in-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}
@@ -686,29 +690,41 @@ h2.s-title em{
 @keyframes dot-breathe{0%,100%{opacity:1}50%{opacity:.5}}
 @keyframes pop-in{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:none}}
 @keyframes bar-up{from{transform:translateY(100%)}to{transform:none}}
+@keyframes curtain-up{from{transform:translateY(0)}to{transform:translateY(-101%)}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes drift-soft{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
-/* — page enters softly — */
-body{animation:page-in .5s ease-out both}
+/* — page opens like a curtain, gold edge leading — */
+body{animation:page-in .7s ease-out both}
+body::after{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  background:var(--ink);border-bottom:2px solid var(--gold);
+  animation:curtain-up .6s cubic-bezier(.76,0,.24,1) .04s both;
+}
 
-/* — home hero, one line at a time — */
-.hero-eyebrow{animation:rise-in .85s cubic-bezier(.16,1,.3,1) .06s both}
-.hero h1{animation:rise-in .95s cubic-bezier(.16,1,.3,1) .14s both}
-.hero-sub{animation:rise-in .95s cubic-bezier(.16,1,.3,1) .26s both}
-.hero-actions{animation:rise-in .95s cubic-bezier(.16,1,.3,1) .38s both}
-.hero-caption{animation:rise-in .8s cubic-bezier(.16,1,.3,1) .52s both}
-.hero-right{animation:rise-in 1s cubic-bezier(.16,1,.3,1) .3s both}
-.hero-stats{animation:rise-in .9s cubic-bezier(.16,1,.3,1) .5s both}
-.notif-pop{animation:rise-in .85s cubic-bezier(.16,1,.3,1) .78s both}
+/* — home hero, one element at a time — */
+.hero-eyebrow{animation:rise-in 1s cubic-bezier(.16,1,.3,1) .62s both}
+.hero h1{animation:mask-rise 1.2s cubic-bezier(.16,1,.3,1) .7s both}
+.hero-sub{animation:rise-in 1s cubic-bezier(.16,1,.3,1) .9s both}
+.hero-actions{animation:rise-in 1s cubic-bezier(.16,1,.3,1) 1.05s both}
+.hero-caption{animation:rise-in .9s cubic-bezier(.16,1,.3,1) 1.2s both}
+.hero-right{animation:rise-in 1.15s cubic-bezier(.16,1,.3,1) .82s both,drift 8s ease-in-out 2.6s infinite}
+.hero-stats{animation:rise-in 1s cubic-bezier(.16,1,.3,1) 1.1s both}
+.notif-pop{animation:rise-in 1s cubic-bezier(.16,1,.3,1) 1.35s both,drift-soft 7s ease-in-out 2.9s infinite}
+.hs-item{animation:rise-in .9s cubic-bezier(.16,1,.3,1) 1.2s backwards}
+.hero-stats .hs-item:nth-child(3){animation-delay:1.28s}
+.hero-stats .hs-item:nth-child(5){animation-delay:1.36s}
+.hero-stats .hs-item:nth-child(7){animation-delay:1.44s}
 
 /* — inner page hero — */
-.page-eyebrow{animation:rise-in .8s cubic-bezier(.16,1,.3,1) .06s both}
-.page-hero h1{animation:rise-in .95s cubic-bezier(.16,1,.3,1) .14s both}
-.page-hero p{animation:rise-in .95s cubic-bezier(.16,1,.3,1) .26s both}
+.page-eyebrow{animation:rise-in .95s cubic-bezier(.16,1,.3,1) .62s both}
+.page-hero h1{animation:mask-rise 1.2s cubic-bezier(.16,1,.3,1) .7s both}
+.page-hero p{animation:rise-in 1s cubic-bezier(.16,1,.3,1) .92s both}
 
 /* — gold highlighter draws across the headline — */
 .hero h1 em{
   background-repeat:no-repeat;background-position:0 0;
-  animation:sweep-in 1.15s cubic-bezier(.22,1,.36,1) .6s both;
+  animation:sweep-in 1.2s cubic-bezier(.22,1,.36,1) 1.3s both;
 }
 
 /* — bars fill, dividers draw, dots breathe — */
@@ -718,11 +734,26 @@ body{animation:page-in .5s ease-out both}
 .live-dot,.dc-live-dot{animation:soft-pulse 2.6s ease-out infinite}
 .eyebrow::before,.page-eyebrow::before{animation:dot-breathe 5s ease-in-out infinite}
 
-/* — scroll reveal, longer and softer — */
-.reveal{transform:translateY(26px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
-.d1{transition-delay:.09s}.d2{transition-delay:.18s}.d3{transition-delay:.27s}.d4{transition-delay:.36s}
+/* — scroll reveal: long rise as each block enters — */
+.reveal{transform:translateY(42px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1.05s cubic-bezier(.16,1,.3,1)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-/* — nav — */
+/* — section headings unmask from the top — */
+.reveal .s-title{clip-path:inset(0 0 108% 0);transition:clip-path 1.1s cubic-bezier(.16,1,.3,1) .12s}
+.reveal.in .s-title{clip-path:inset(0)}
+.prose.reveal h3{clip-path:inset(0 0 108% 0);transition:clip-path 1.1s cubic-bezier(.16,1,.3,1) .15s}
+.prose.reveal.in h3{clip-path:inset(0)}
+
+/* — nav tightens once the page moves — */
+.nav-inner{transition:height .45s cubic-bezier(.16,1,.3,1)}
+#nav{transition:box-shadow .4s,background .4s}
+#nav.solid .nav-inner{height:60px}
+#nav.solid .logo img{height:29px!important}
+#nav.solid{
+  background:rgba(252,252,250,.86);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  box-shadow:0 10px 30px rgba(18,22,29,.06);
+}
 .nav-links a{position:relative;transition:color .25s}
 .nav-links a::after{
   content:'';position:absolute;left:0;right:0;bottom:-5px;height:1px;background:currentColor;
@@ -775,37 +806,41 @@ body{animation:page-in .5s ease-out both}
     transition:background .25s,border-color .25s,color .25s,
       transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;
   }
-  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(26,86,255,.18)}
-  .btn-gold:active{transform:translateY(0);box-shadow:none}
-  .btn-white:hover{transform:translateY(-2px)}
-  .btn-blue:hover{transform:translateY(-1px)}
-  .f-submit:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(26,86,255,.18)}
-  .f-submit:active{transform:translateY(0);box-shadow:none}
-  .nav-pill:hover{transform:translateY(-1px)!important}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(26,86,255,.22)}
+  .btn-gold:active{transform:translateY(0) scale(.985);box-shadow:none}
+  .btn-white:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(0,0,0,.18)}
+  .btn-white:active{transform:translateY(0) scale(.985)}
+  .btn-blue:hover{transform:translateY(-2px)}
+  .btn-blue:active{transform:translateY(0)}
+  .f-submit:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(26,86,255,.22)}
+  .f-submit:active{transform:translateY(0) scale(.99);box-shadow:none}
+  .nav-pill:hover{transform:translateY(-2px)!important}
   .btn-tg,.btn-wa{transition:color .25s,border-color .25s,transform .3s cubic-bezier(.16,1,.3,1)}
-  .btn-tg:hover,.btn-wa:hover{transform:translateY(-1px)}
+  .btn-tg:hover,.btn-wa:hover{transform:translateY(-2px)}
   .wa-float{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .25s}
   .wa-float:hover{transform:translateY(-3px) scale(1.03)}
 
-  /* cards lift by a hairline, never more */
+  /* cards lift and warm their edge */
   .inner-card,.who-big,.dash-card,.proc-card{
-    transition:border-color .3s,transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s cubic-bezier(.16,1,.3,1);
+    transition:border-color .35s,transform .55s cubic-bezier(.16,1,.3,1),box-shadow .55s cubic-bezier(.16,1,.3,1);
   }
   .inner-card:hover,.who-big:hover,.dash-card:hover,.proc-card:hover{
-    transform:translateY(-4px);box-shadow:0 20px 44px rgba(18,22,29,.07);border-color:var(--line-2);
+    transform:translateY(-6px) scale(1.006);
+    box-shadow:0 26px 60px rgba(18,22,29,.10);
+    border-color:var(--muted-2);
   }
-  .trust-card,.who-card{transition:transform .45s cubic-bezier(.16,1,.3,1)}
-  .trust-card:hover,.who-card:hover{transform:translateY(-3px)}
+  .trust-card,.who-card{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .trust-card:hover,.who-card:hover{transform:translateY(-5px)}
   .trust-card h4,.who-card h4{transition:color .3s}
   .trust-card:hover h4,.who-card:hover h4{color:var(--blue)}
 
   /* promise + stats micro-motion */
   .p-card h3{transition:color .3s}
   .p-card:hover h3{color:var(--blue)}
-  .p-card .p-num{transition:transform .4s cubic-bezier(.16,1,.3,1),color .3s}
-  .p-card:hover .p-num{transform:translateX(5px)}
+  .p-card .p-num{transition:transform .45s cubic-bezier(.16,1,.3,1),color .3s}
+  .p-card:hover .p-num{transform:translateX(7px)}
   .hs-item{transition:transform .35s cubic-bezier(.16,1,.3,1)}
-  .hs-item:hover{transform:translateY(-2px)}
+  .hs-item:hover{transform:translateY(-3px)}
   .hs-val{transition:color .3s}
   .hs-item:hover .hs-val{color:var(--blue)}
   .dc-stat .dc-val{transition:transform .35s cubic-bezier(.16,1,.3,1)}
@@ -820,20 +855,26 @@ body{animation:page-in .5s ease-out both}
   .c-trust-item:hover .cti-icon{background:var(--ink);border-color:var(--ink);color:var(--white);transform:scale(1.05)}
 
   /* socials + ticker */
-  .soc:hover{transform:translateY(-2px)}
+  .soc:hover{transform:translateY(-3px) rotate(-4deg)}
   .ticker-wrap:hover .ticker-track{animation-play-state:paused}
   .tk-item{transition:color .3s}
   .tk-item:hover{color:var(--ink)}
 }
 
-/* — scroll progress hairline (progressive enhancement) — */
+/* — scroll-linked touches (progressive enhancement) — */
 @supports (animation-timeline:scroll()){
   @keyframes scroll-line{to{transform:scaleX(1)}}
   body::before{
-    content:'';position:fixed;top:0;left:0;right:0;height:2px;z-index:550;
-    background:linear-gradient(90deg,var(--blue),var(--gold));
+    content:'';position:fixed;top:0;left:0;right:0;height:3px;z-index:550;
+    background:linear-gradient(90deg,var(--blue),var(--sky) 55%,var(--gold));
     transform:scaleX(0);transform-origin:0 50%;
     animation:scroll-line linear both;animation-timeline:scroll(root);
+  }
+  @keyframes banner-settle{from{transform:scale(1.06);opacity:.4}to{transform:none;opacity:1}}
+  .final-banner{
+    animation:banner-settle linear both;
+    animation-timeline:view();
+    animation-range:entry 0% entry 90%;
   }
 }
 
@@ -849,8 +890,25 @@ body{animation:page-in .5s ease-out both}
 .logo img{height:36px!important;width:auto!important}
 
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
